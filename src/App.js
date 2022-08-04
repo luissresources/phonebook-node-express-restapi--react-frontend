@@ -27,6 +27,9 @@ const App = () => {
     if (validationName) {
       const personToUpdate = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
       const personToUpdateWithNewTel = {...personToUpdate, number : newTel}
+      if(newTel.length < 8){
+        return errorNotification('the number must be at least 8 digits long')
+      }
       const validationConfirmUpdate = window.confirm(`${personToUpdateWithNewTel.name} is already added to phonebook, replace the old number with a new one?`)
       if (validationConfirmUpdate) {
         personDataService.update(personToUpdate.id, personToUpdateWithNewTel)
@@ -41,9 +44,8 @@ const App = () => {
           setNewTel('')
         })
         .catch(error => {
-          errorNotification(`Information of ${newName} has already been removed from server`)
-          setPersons(persons.filter(person => person.id !== personToUpdate.id))
-        })
+          console.log('update error: ', error)
+          })
       }
     } else {
 
@@ -53,7 +55,7 @@ const App = () => {
       }
 
       if(newTel.length < 8) {
-        return errorNotification('Number must be greater that 10000000 ')
+        return errorNotification('the number must be at least 8 digits long')
       }
       
       const newPersonObject = {
