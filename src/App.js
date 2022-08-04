@@ -46,6 +46,15 @@ const App = () => {
         })
       }
     } else {
+
+
+      if(newName.length < 4) {
+        return errorNotification('Name very short')
+      }
+
+      if(newTel.length < 8) {
+        return errorNotification('Number must be greater that 10000000 ')
+      }
       
       const newPersonObject = {
         name: newName,

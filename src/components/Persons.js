@@ -10,7 +10,7 @@ const Persons = ({newSearch, persons, filterSearch, deletePerson}) => {
           persons.map(person => {
             return (
               <Person
-                key={person.key}
+                key={person.id}
                 id = {person.id}
                 person={person}
                 deletePerson = {() => deletePerson(person.id)}
